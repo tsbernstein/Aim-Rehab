@@ -24,7 +24,7 @@ In addition, this project will include:
 * npm to manage project dependencies.
 
 ## Wireframes
-![Aim-Rehab](https://user-images.githubusercontent.com/79271412/127004849-301e6299-cb3d-4c82-b5bd-0ccec8cb6a17.png)
+![Aim-Rehab](https://user-images.githubusercontent.com/79271412/127005294-ed490ba2-da51-4e8e-8df5-4df09431698c.png)
 
 ## Implementation Timeline
 * Monday: Implement canvas game board and underlying game logic to make clickable targets.
