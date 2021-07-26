@@ -1,16 +1,16 @@
-
 class Target {
-    constructor(){
-        this.genTarget = genTarget();
+    constructor(ctx){
+
     }
 
-    genTarget(){
+    drawTarget(ctx) {
         ctx.beginPath();
         ctx.arc(240, 160, 20, 0, Math.PI*2, false)
         ctx.fillStyle = 'blue';
         ctx.fill();
-        ctx.closePatch();
+        ctx.closePath();
     }
 }
+
 
 export default Target;
