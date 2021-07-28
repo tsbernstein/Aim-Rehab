@@ -6,6 +6,5 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctx = gameCanvas.getContext('2d');
     gameCanvas.width = innerWidth;
     gameCanvas.height = innerHeight;
-    let game = new Game(gameCanvas.width, gameCanvas.height, ctx);
-    game.targets[0].drawTarget(ctx);
+    let game = new Game(gameCanvas.width, gameCanvas.height, ctx, gameCanvas);
 })
