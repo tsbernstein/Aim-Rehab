@@ -1,10 +1,11 @@
 import Target from './scripts/targets'
+import Game from './scripts/game'
 
 document.addEventListener('DOMContentLoaded', () => {
     const gameCanvas = document.getElementById('game-canvas');
     const ctx = gameCanvas.getContext('2d');
     gameCanvas.width = innerWidth;
     gameCanvas.height = innerHeight;
-
-    new Target(100, 100, 30).drawTarget(ctx);
+    let game = new Game(gameCanvas.width, gameCanvas.height, ctx);
+    game.targets[0].drawTarget(ctx);
 })
