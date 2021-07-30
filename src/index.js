@@ -1,12 +1,15 @@
 import Target from './scripts/targets'
+import Game from './scripts/game'
 
 document.addEventListener('DOMContentLoaded', () => {
     const gameCanvas = document.getElementById('game-canvas');
     const ctx = gameCanvas.getContext('2d');
-
-    ctx.beginPath();
-    ctx.arc(200, 100, 10, 0, Math.PI*2, false)
-    ctx.fillStyle = 'blue';
-    ctx.fill();
-    ctx.closePatch();
+    gameCanvas.width = innerWidth;
+    gameCanvas.height = innerHeight;
+    let game = new Game(gameCanvas.width, gameCanvas.height, ctx, gameCanvas);
+    let score = game.score
+    const scoreEl = document.getElementById('score-number')
+    scoreEl.innerHTML = score
+    game.gameStart()
+    // game.animate();
 })

@@ -1,16 +1,25 @@
-
 class Target {
-    constructor(){
-        this.genTarget = genTarget();
+    constructor(centerX, centerY, radius){
+        this.centerX = centerX;
+        this.centerY = centerY;
+        this.radius = radius;
     }
 
-    genTarget(){
+    drawTarget(ctx) {
         ctx.beginPath();
-        ctx.arc(240, 160, 20, 0, Math.PI*2, false)
-        ctx.fillStyle = 'blue';
+        ctx.arc(this.centerX, this.centerY, this.radius, 0, Math.PI*2, false)
+        ctx.fillStyle = 'red';
         ctx.fill();
-        ctx.closePatch();
+        ctx.closePath();
     }
 }
+
+// clicking target will make it disappear
+
+
+// new circle will be drawn in a random location every # seconds
+
+// if target not clicked within # seconds, it will disappear
+// 
 
 export default Target;
