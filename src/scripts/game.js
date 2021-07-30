@@ -4,23 +4,29 @@ class Game {
     constructor(canvasWidth, canvasHeight, ctx, canvas){
         this.targets = [];
         this.score = 0;
+        this.gameTime = 15;
         this.canvasHeight = canvasHeight;
         this.canvasWidth = canvasWidth;
         this.ctx = ctx;
         this.canvas = canvas;
         this.randomTargets();
         this.spawnTargets();
-        this.getCursorPos();
-        this.getTargetPos();
-        this.breakTarget(this.getCursorPos(), this.getTargetPos());
-
+        this.cursorPos = this.getCursorPos();
+        this.targetPos = this.getTargetPos();
+        this.hitCheck = this.hitCheck.bind(this);
+        this.canvas.addEventListener('click',
+            this.hitCheck
+        )
         this.randomTargets = this.randomTargets.bind(this)
         this.spawnTargets = this.spawnTargets.bind(this)
+        this.getTargetPos = this.getTargetPos.bind(this)
+        this.getCursorPos = this.getCursorPos.bind(this)
+        this.animate = this.animate.bind(this);
     }
 
     randomTargets(){
         let randomX = Math.floor(Math.random() * (this.canvasWidth - 30)) + 30;
-        let randomY = Math.floor(Math.random() * (this.canvasHeight - 35)) + 35;
+        let randomY = Math.floor(Math.random() * (this.canvasHeight - 60)) + 60;
 
         this.targets.push(new Target(randomX, randomY, 30))
     }
@@ -28,25 +34,20 @@ class Game {
     spawnTargets(){
         const populateTargets = function() {
             this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+            this.currentTarget = this.targets.shift();
+            this.currentTarget.drawTarget(this.ctx);
             this.randomTargets();
-            let target = this.targets.shift();
-            target.drawTarget(this.ctx);
         }.bind(this)
 
-        setInterval(populateTargets, 3000)
+        populateTargets();
     }
 
     getTargetPos(){
-        let currentTarget = function(){
-            let x = this.targets.slice(-1)[0].centerX;
-            let y = this.targets.slice(-1)[0].centerY;
-            return [x, y];
-        }.bind(this);
-        setInterval(currentTarget, 3000)
-        // return [x, y];
+        const rect = this.canvas.getBoundingClientRect();
+        let x = this.currentTarget.centerX - rect.left;
+        let y = this.currentTarget.centerY - rect.top;
+        this.targetPos = [x, y];
     }
-
-    //     this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight))
 
     getCursorPos() {
         this.canvas.addEventListener('click',
@@ -54,34 +55,45 @@ class Game {
                 const rect = this.canvas.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                return [x, y];
+                this.cursorPos = [x, y];
             }
         )
     }
 
-    breakTarget(cursorPos, targetPos){
-        if(!cursorPos) return null;
-        if(!targetPos) return null;
-        const cursorX = cursorPos[0];
-        const cursorY = cursorPos[1];
-        const targetX = targetPos[0];
-        const targetY = targetPos[1];
-        if (Math.sqrt((cursorX - targetX) * (cursorX - targetX) + (cursorY - targetY) * (cursorY - targetY)) < 30){
-            this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
+    hitCheck() {
+        this.getCursorPos();
+        this.getTargetPos();
+        const cursorX = this.cursorPos[0];
+        const cursorY = this.cursorPos[1];
+        const targetX = this.targetPos[0];
+        const targetY = this.targetPos[1];
+        if (Math.hypot((cursorX - targetX), (cursorY - targetY)) < 30){
+            this.spawnTargets();
+            this.score++
+            console.log(this.score)
+        }
+    }
+
+    animate(currentTime) {
+        let animationId = requestAnimationFrame(this.animate);
+        let timeLeft = Math.ceil(this.gameTime - (currentTime / 1000));
+        if (timeLeft) {
+            console.log(timeLeft);
+        }
+        if (timeLeft === 0) {
+            console.log('game over')
+            cancelAnimationFrame(animationId);
+            this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
         }
     }
 
     gameStart(){
-
+        this.animate();
     }
 
     gameOver(){
 
     }
 }
-
-// rounds will last 1 minute
-// start game
-// clicking target will add a point to the score
 
 export default Game;

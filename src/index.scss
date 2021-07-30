@@ -35,8 +35,15 @@ body {
     margin: 0;
     height: 100%;
     width: 100%;
+    overflow: hidden;
     // display: flex;
     // justify-content: center;
     // align-items: center;
     // margin-top: 5%;
+}
+
+.top-info {
+    z-index: 1;
+    position: fixed;
+    color: white;
 }
