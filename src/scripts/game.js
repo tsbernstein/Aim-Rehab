@@ -70,7 +70,6 @@ class Game {
         if (Math.hypot((cursorX - targetX), (cursorY - targetY)) < 30){
             this.spawnTargets();
             this.score++
-            console.log(this.score)
         }
     }
 
@@ -78,10 +77,8 @@ class Game {
         let animationId = requestAnimationFrame(this.animate);
         let timeLeft = Math.ceil(this.gameTime - (currentTime / 1000));
         if (timeLeft) {
-            console.log(timeLeft);
         }
         if (timeLeft === 0) {
-            console.log('game over')
             cancelAnimationFrame(animationId);
             this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
         }
