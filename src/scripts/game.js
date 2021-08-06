@@ -76,8 +76,6 @@ class Game {
     animate(currentTime) {
         let animationId = requestAnimationFrame(this.animate);
         let timeLeft = Math.ceil(this.gameTime - (currentTime / 1000));
-        if (timeLeft) {
-        }
         if (timeLeft === 0) {
             cancelAnimationFrame(animationId);
             this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);

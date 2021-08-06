@@ -7,9 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gameCanvas.width = innerWidth;
     gameCanvas.height = innerHeight;
     let game = new Game(gameCanvas.width, gameCanvas.height, ctx, gameCanvas);
-    let score = game.score
-    const scoreEl = document.getElementById('score-number')
-    scoreEl.innerHTML = score
     game.gameStart()
-    // game.animate();
+    let score = game.score
+    let scoreEl = document.getElementById('score-number').innerHTML = score;
 })
