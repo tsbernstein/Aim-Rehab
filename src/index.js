@@ -1,4 +1,3 @@
-import Target from './scripts/targets'
 import Game from './scripts/game'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -6,8 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctx = gameCanvas.getContext('2d');
     gameCanvas.width = innerWidth;
     gameCanvas.height = innerHeight;
-    let game = new Game(gameCanvas.width, gameCanvas.height, ctx, gameCanvas);
+    let scoreEl = document.getElementById('score-number');
+    let game = new Game(gameCanvas.width, gameCanvas.height, ctx, gameCanvas, scoreEl);
     game.gameStart()
-    let score = game.score
-    let scoreEl = document.getElementById('score-number').innerHTML = score;
 })

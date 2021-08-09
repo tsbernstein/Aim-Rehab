@@ -7,10 +7,10 @@
     "defaults"
   ],
   "engines": {
-    "node": "14.x" 
+    "node": "14.x"
   },
   "scripts": {
-    "start": "node app.js", 
+    "start": "node app.js",
     "start:debug": "node --inspect app.js",
     "watch": "webpack --watch --mode=development",
     "build": "webpack --mode=production"

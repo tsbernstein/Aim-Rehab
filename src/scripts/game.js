@@ -1,9 +1,10 @@
 import Target from './targets'
 
 class Game {
-    constructor(canvasWidth, canvasHeight, ctx, canvas){
+    constructor(canvasWidth, canvasHeight, ctx, canvas, scoreEl){
         this.targets = [];
         this.score = 0;
+        this.scoreEl = scoreEl;
         this.gameTime = 15;
         this.canvasHeight = canvasHeight;
         this.canvasWidth = canvasWidth;
@@ -17,6 +18,7 @@ class Game {
         this.canvas.addEventListener('click',
             this.hitCheck
         )
+        this.scoreEl.innerHTML = this.score;
         this.randomTargets = this.randomTargets.bind(this)
         this.spawnTargets = this.spawnTargets.bind(this)
         this.getTargetPos = this.getTargetPos.bind(this)
@@ -25,8 +27,8 @@ class Game {
     }
 
     randomTargets(){
-        let randomX = Math.floor(Math.random() * (this.canvasWidth - 30)) + 30;
-        let randomY = Math.floor(Math.random() * (this.canvasHeight - 60)) + 60;
+        let randomX = Math.floor(Math.random() * (this.canvasWidth - 60) + 30);
+        let randomY = Math.floor(Math.random() * (this.canvasHeight - 60) + 30);
 
         this.targets.push(new Target(randomX, randomY, 30))
     }
@@ -69,7 +71,8 @@ class Game {
         const targetY = this.targetPos[1];
         if (Math.hypot((cursorX - targetX), (cursorY - targetY)) < 30){
             this.spawnTargets();
-            this.score++
+            this.score++;
+            this.scoreEl.innerHTML = this.score;
         }
     }
 
