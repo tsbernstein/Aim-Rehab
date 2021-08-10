@@ -1,11 +1,12 @@
 import Target from './targets'
 
 class Game {
-    constructor(canvasWidth, canvasHeight, ctx, canvas, scoreEl){
+    constructor(canvasWidth, canvasHeight, ctx, canvas, scoreEl, gameTimeLeft){
         this.targets = [];
         this.score = 0;
         this.scoreEl = scoreEl;
         this.gameTime = 15;
+        this.gameTimeLeft = gameTimeLeft;
         this.canvasHeight = canvasHeight;
         this.canvasWidth = canvasWidth;
         this.ctx = ctx;
@@ -19,10 +20,11 @@ class Game {
             this.hitCheck
         )
         this.scoreEl.innerHTML = this.score;
-        this.randomTargets = this.randomTargets.bind(this)
-        this.spawnTargets = this.spawnTargets.bind(this)
-        this.getTargetPos = this.getTargetPos.bind(this)
-        this.getCursorPos = this.getCursorPos.bind(this)
+        this.gameTimeLeft.innerHTML = this.gameTime;
+        this.randomTargets = this.randomTargets.bind(this);
+        this.spawnTargets = this.spawnTargets.bind(this);
+        this.getTargetPos = this.getTargetPos.bind(this);
+        this.getCursorPos = this.getCursorPos.bind(this);
         this.animate = this.animate.bind(this);
     }
 
@@ -79,6 +81,7 @@ class Game {
     animate(currentTime) {
         let animationId = requestAnimationFrame(this.animate);
         let timeLeft = Math.ceil(this.gameTime - (currentTime / 1000));
+        this.gameTimeLeft.innerHTML = timeLeft;
         if (timeLeft === 0) {
             cancelAnimationFrame(animationId);
             this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);

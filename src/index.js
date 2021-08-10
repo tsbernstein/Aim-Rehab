@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gameCanvas.width = innerWidth;
     gameCanvas.height = innerHeight;
     let scoreEl = document.getElementById('score-number');
-    let game = new Game(gameCanvas.width, gameCanvas.height, ctx, gameCanvas, scoreEl);
+    let gameTime = document.getElementById('game-time');
+    let game = new Game(gameCanvas.width, gameCanvas.height, ctx, gameCanvas, scoreEl, gameTime);
     game.gameStart()
 })
