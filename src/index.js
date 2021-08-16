@@ -8,5 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let scoreEl = document.getElementById('score-number');
     let gameTime = document.getElementById('game-time');
     let game = new Game(gameCanvas.width, gameCanvas.height, ctx, gameCanvas, scoreEl, gameTime);
-    game.gameStart()
+    const gameStartEl = document.getElementById('start-game');
+    const modalEl = document.getElementById('modal-container')
+    gameStartEl.addEventListener('click',
+        e => {
+            game.gameStart();
+            modalEl.style.display = 'none';
+        })
 })
