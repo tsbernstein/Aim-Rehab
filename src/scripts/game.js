@@ -1,13 +1,13 @@
 import Target from './targets'
 
 class Game {
-    constructor(canvasWidth, canvasHeight, ctx, canvas, scoreEl, gameTimeLeft, modalEl){
+    constructor(canvasWidth, canvasHeight, ctx, canvas, scoreEl, gameTimeEl, modalEl){
         this.targets = [];
         this.score = 0;
         this.scoreEl = scoreEl;
         this.modalEl = modalEl;
-        this.gameTime = 15;
-        this.gameTimeLeft = gameTimeLeft;
+        this.gameTime = 10;
+        this.gameTimeEl = gameTimeEl;
         this.canvasHeight = canvasHeight;
         this.canvasWidth = canvasWidth;
         this.ctx = ctx;
@@ -21,7 +21,7 @@ class Game {
             this.hitCheck
         )
         this.scoreEl.innerHTML = this.score;
-        this.gameTimeLeft.innerHTML = this.gameTime;
+        this.gameTimeEl.innerHTML = this.gameTime;
         this.randomTargets = this.randomTargets.bind(this);
         this.spawnTargets = this.spawnTargets.bind(this);
         this.getTargetPos = this.getTargetPos.bind(this);
@@ -82,12 +82,15 @@ class Game {
     animate(currentTime) {
         let animationId = requestAnimationFrame(this.animate);
         let timeLeft = Math.ceil(this.gameTime - (currentTime / 1000));
-        this.gameTimeLeft.innerHTML = timeLeft;
+        this.gameTimeEl.innerHTML = timeLeft;
+        console.log(currentTime);
         if (timeLeft === 0) {
             this.gameOver(animationId);
-            this.modalEl.style.display = 'flex';
-            timeLeft = this.gameTime;
         }
+    }
+
+    timer() {
+        
     }
 
     gameStart(){
@@ -97,6 +100,7 @@ class Game {
     gameOver(animationId){
         cancelAnimationFrame(animationId);
         this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+        this.modalEl.style.display = 'flex';
     }
 }
 

@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalEl = document.getElementById('modal-container')
     const gameStartEl = document.getElementById('start-game');
     gameStartEl.addEventListener('click',
-    e => {
-            let game = new Game(gameCanvas.width, gameCanvas.height, ctx, gameCanvas, scoreEl, gameTime, modalEl);
-            game.gameStart();
-            modalEl.style.display = 'none';
-        }
+        e => {
+                let game = new Game(gameCanvas.width, gameCanvas.height, ctx, gameCanvas, scoreEl, gameTime, modalEl);
+                game.gameStart();
+                modalEl.style.display = 'none';
+            }
     )
 })
