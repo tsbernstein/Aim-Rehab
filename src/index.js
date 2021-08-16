@@ -7,12 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
     gameCanvas.height = innerHeight;
     let scoreEl = document.getElementById('score-number');
     let gameTime = document.getElementById('game-time');
-    let game = new Game(gameCanvas.width, gameCanvas.height, ctx, gameCanvas, scoreEl, gameTime);
-    const gameStartEl = document.getElementById('start-game');
     const modalEl = document.getElementById('modal-container')
+    const gameStartEl = document.getElementById('start-game');
     gameStartEl.addEventListener('click',
-        e => {
+    e => {
+            let game = new Game(gameCanvas.width, gameCanvas.height, ctx, gameCanvas, scoreEl, gameTime, modalEl);
             game.gameStart();
             modalEl.style.display = 'none';
-        })
+        }
+    )
 })

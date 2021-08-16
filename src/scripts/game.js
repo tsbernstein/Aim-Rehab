@@ -1,10 +1,11 @@
 import Target from './targets'
 
 class Game {
-    constructor(canvasWidth, canvasHeight, ctx, canvas, scoreEl, gameTimeLeft){
+    constructor(canvasWidth, canvasHeight, ctx, canvas, scoreEl, gameTimeLeft, modalEl){
         this.targets = [];
         this.score = 0;
         this.scoreEl = scoreEl;
+        this.modalEl = modalEl;
         this.gameTime = 15;
         this.gameTimeLeft = gameTimeLeft;
         this.canvasHeight = canvasHeight;
@@ -83,8 +84,9 @@ class Game {
         let timeLeft = Math.ceil(this.gameTime - (currentTime / 1000));
         this.gameTimeLeft.innerHTML = timeLeft;
         if (timeLeft === 0) {
-            cancelAnimationFrame(animationId);
-            this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+            this.gameOver(animationId);
+            this.modalEl.style.display = 'flex';
+            timeLeft = this.gameTime;
         }
     }
 
@@ -92,8 +94,9 @@ class Game {
         this.animate();
     }
 
-    gameOver(){
-
+    gameOver(animationId){
+        cancelAnimationFrame(animationId);
+        this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
     }
 }
 
