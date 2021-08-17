@@ -1,7 +1,7 @@
 import Target from './targets'
 
 class Game {
-    constructor(canvasWidth, canvasHeight, ctx, canvas, scoreEl, gameTimeEl, modalEl){
+    constructor(canvasWidth, canvasHeight, ctx, canvas, scoreEl, gameTimeEl, modalEl, finalScoreEl){
         this.targets = [];
         this.score = 0;
         this.scoreEl = scoreEl;
@@ -12,6 +12,7 @@ class Game {
         this.canvasWidth = canvasWidth;
         this.ctx = ctx;
         this.canvas = canvas;
+        this.finalScoreEl = finalScoreEl;
         this.randomTargets();
         this.spawnTargets();
         this.cursorPos = this.getCursorPos();
@@ -26,7 +27,7 @@ class Game {
         this.spawnTargets = this.spawnTargets.bind(this);
         this.getTargetPos = this.getTargetPos.bind(this);
         this.getCursorPos = this.getCursorPos.bind(this);
-        this.animate = this.animate.bind(this);
+        // this.animate = this.animate.bind(this);
     }
 
     randomTargets(){
@@ -79,26 +80,36 @@ class Game {
         }
     }
 
-    animate(currentTime) {
-        let animationId = requestAnimationFrame(this.animate);
-        let timeLeft = Math.ceil(this.gameTime - (currentTime / 1000));
-        this.gameTimeEl.innerHTML = timeLeft;
-        console.log(currentTime);
-        if (timeLeft === 0) {
-            this.gameOver(animationId);
+    // animate(currentTime) {
+    //     let animationId = requestAnimationFrame(this.animate);
+    //     let timeLeft = Math.ceil(this.gameTime - (currentTime / 1000));
+    //     this.gameTimeEl.innerHTML = timeLeft;
+    //     console.log(currentTime);
+    //     if (timeLeft === 0) {
+    //         this.gameOver(animationId);
+    //     }
+    // }
+
+    timer(intervalId) {
+        if (this.gameTime === 0) {
+            this.finalScoreEl.innerHTML = this.score;
+            this.gameOver();
+            clearInterval(intervalId);
+        } else {
+            this.gameTime--;
+            this.gameTimeEl.innerHTML = this.gameTime;
         }
     }
 
-    timer() {
-        
-    }
-
     gameStart(){
-        this.animate();
+        // this.animate();
+        let intervalId = setInterval(() => {
+            this.timer(intervalId)
+        }, 1000); 
     }
 
-    gameOver(animationId){
-        cancelAnimationFrame(animationId);
+    gameOver(){
+        // cancelAnimationFrame(animationId);
         this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
         this.modalEl.style.display = 'flex';
     }

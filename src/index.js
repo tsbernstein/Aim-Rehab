@@ -9,9 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let gameTime = document.getElementById('game-time');
     const modalEl = document.getElementById('modal-container')
     const gameStartEl = document.getElementById('start-game');
+    const finalScoreEl = document.getElementById('final-score-el');
     gameStartEl.addEventListener('click',
         e => {
-                let game = new Game(gameCanvas.width, gameCanvas.height, ctx, gameCanvas, scoreEl, gameTime, modalEl);
+                let game = new Game(gameCanvas.width, gameCanvas.height, ctx, gameCanvas, scoreEl, gameTime, modalEl, finalScoreEl);
                 game.gameStart();
                 modalEl.style.display = 'none';
             }
