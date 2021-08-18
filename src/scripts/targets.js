@@ -20,6 +20,5 @@ class Target {
 // new circle will be drawn in a random location every # seconds
 
 // if target not clicked within # seconds, it will disappear
-// 
 
 export default Target;

@@ -13,6 +13,7 @@ body {
 .top-info {
     display: flex;
     align-items: center;
+    justify-content: space-around;
     z-index: 1;
     position: fixed;
     color: white;
@@ -26,11 +27,7 @@ body {
 }
 
 .time {
-    display: flex;
-    justify-content: center;
-    width: 100%;
     font-size: 50px;
-    position: fixed;
 }
 
 #modal-container {
@@ -53,8 +50,33 @@ body {
     width: 20em;
     height: 10em;
     border-radius: 25px;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    border: 1px solid black;
 }
 
 #start-game {
     border-radius: 25px;
+    height: 3em;
+    width: 70%;
+    white-space: nowrap;
+}
+
+#start-game:hover {
+    cursor: pointer;
+    background-color: orange;
+}
+
+#final-score-el {
+    font-size: 50px;
+} 
+
+img {
+    height: 40px;
+    width: 40px;
+    pointer-events: all;
+}
+
+#author-info {
+    font-size: larger;
 }

@@ -7,26 +7,46 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./src/reset.css">
     <link rel="stylesheet" href="./dist/main.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="./favicon_io/site.webmanifest">
     <title>Aim-Rehab</title>
 </head>
 
 <body>
     <div class='top-info'>
         <div class='score'>
-            <span>Score: </span>
-            <span id='score-number'></span>
+            <div>Score: 
+                <span id='score-number'>--</span>
+            </div>
         </div>
         <div class='time'>
-            <span id="game-time"></span>
+            <span id="game-time">--</span>
+        </div>
+        <div id='author-info'>About the author
+            <div>
+                <a href="https://github.com/tsbernstein/Aim-Rehab">
+                    <img src='./linkImages/GitHub-Mark-64px.png'/>
+                </a>
+                <a href="https://www.linkedin.com/in/tyler-bernstein-356ba0106/">
+                    <img src='./linkImages/LI-In-Bug.png'/>
+                </a>
+                <a href="https://angel.co/u/tyler-bernstein-5">
+                    <img src='./linkImages/AngelList_Black_Victory_Hand.png'/>
+                </a>
+            </div>
         </div>
     </div>
     <div id='modal-container'>
         <div class='modal'>
             <p>Final Score</p>
             <h1 class="score" id='final-score-el'>0</h1>
-            <div>
-                <button id='start-game'>Start Game</button>
-            </div>
+            <br>
+            <button id='start-game'>Start Game</button>
+            <br>
+            <p>Instructions:</p>
+            <p>Click the targets as fast as you can!</p>
         </div>
     </div>
     <canvas id='game-canvas'></canvas>
